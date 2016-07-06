@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Windows.Input;
-//using CRUD_WP81.DataStorageModel;
+
 
 
 namespace CRUD_WP81
@@ -26,23 +26,38 @@ namespace CRUD_WP81
         public ObservableCollection<DataStorageModel> Models { get; set; }
         //Event Handlers
         public ICommand CreateClickCommand { get; set; }
+        public ICommand UpdateClickCommand { get; set; }
+        public ICommand DeleteClickCommand { get; set; }
         public ViewModel()
         {
             CreateClickCommand = new RelayCommand(arg => CreateClickMethod());
-
-            Models = new ObservableCollection<DataStorageModel>()
-             {
-               //new DataStorageModel {Name = "Honda", Surname="Civic" , Age = 30000}
- //            new DataStorageModel {Name = "Ford", Surname="Mustang", AZge= 15000},
- //            new DataStorageModel {Name = "Lada", Surname="Kalina", Age= 5000}
-            };
+            UpdateClickCommand = new RelayCommand(arg => UpdateClickMethod());
+            DeleteClickCommand = new RelayCommand(arg => DeleteClickMethod());
+            //Some mock data
+            //Models = new ObservableCollection<DataStorageModel>()         
+            // {
+            //   new DataStorageModel {Name = "Honda", Surname="Civic" , Age = 30000},
+            //   new DataStorageModel {Name = "Ford", Surname="Mustang", Age= 15000},
+            //   new DataStorageModel {Name = "Lada", Surname="Kalina", Age= 5000}
+            //};
         }
+
+
         private void CreateClickMethod()
         {
             Models.Add(new DataStorageModel() { Name = NewName, Surname = NewSurname, Age = NewAge });
           
         }
 
+        private void UpdateClickMethod()
+        {
+
+        }
+
+        private void DeleteClickMethod()
+        {
+            
+        }
        
 
     
