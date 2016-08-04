@@ -13,6 +13,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Windows.Input;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
+
 
 
 
@@ -20,10 +23,11 @@ namespace CRUD_WP81
 {
     public class ViewModel
     {
+        public ObservableCollection<DataStorageModel> Models { get; set; }
         public string NewName { get; set; }
         public string NewSurname { get; set; }
         public int NewAge { get; set; }
-        public ObservableCollection<DataStorageModel> Models { get; set; }
+
         //Event Handlers
         public ICommand CreateClickCommand { get; set; }
         public ICommand UpdateClickCommand { get; set; }
@@ -34,19 +38,19 @@ namespace CRUD_WP81
             UpdateClickCommand = new RelayCommand(arg => UpdateClickMethod());
             DeleteClickCommand = new RelayCommand(arg => DeleteClickMethod());
             //Some mock data
-            //Models = new ObservableCollection<DataStorageModel>()         
-            // {
-            //   new DataStorageModel {Name = "Honda", Surname="Civic" , Age = 30000},
-            //   new DataStorageModel {Name = "Ford", Surname="Mustang", Age= 15000},
-            //   new DataStorageModel {Name = "Lada", Surname="Kalina", Age= 5000}
-            //};
+            Models = new ObservableCollection<DataStorageModel>()
+             {
+                   new DataStorageModel {Name = "Honda", Surname="Civic" , Age = 30000}
+                 //   new DataStorageModel {Name = "Ford", Surname="Mustang", Age= 15000},
+                 //   new DataStorageModel {Name = "Lada", Surname="Kalina", Age= 5000}
+             };
         }
 
 
         private void CreateClickMethod()
         {
             Models.Add(new DataStorageModel() { Name = NewName, Surname = NewSurname, Age = NewAge });
-          
+
         }
 
         private void UpdateClickMethod()
@@ -56,10 +60,7 @@ namespace CRUD_WP81
 
         private void DeleteClickMethod()
         {
-            
+//            Models.ToList().RemoveAt(x => x.IsSelected = SelectedIndex);
         }
-       
-
-    
     }
 }
