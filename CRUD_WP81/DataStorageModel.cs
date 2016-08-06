@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace CRUD_WP81
 {
@@ -20,19 +15,15 @@ namespace CRUD_WP81
             get { return _isSelected; }
             set
             {
-                if (_isSelected != value)
-                {
-                    _isSelected = value;
-                    OnPropertyChanged("IsSelected");
-
-                }
+                if (_isSelected == value) return;
+                _isSelected = value;
+                OnPropertyChanged("IsSelected");
             }
         }
 
-            public event PropertyChangedEventHandler PropertyChanged;
-            protected virtual void OnPropertyChanged(string propertyName)
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
