@@ -14,15 +14,27 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Windows.Input;
 using System.ComponentModel;
-using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 
 
 
 
 namespace CRUD_WP81
 {
-    public class ViewModel
+    public class ViewModel : INotifyPropertyChanged
     {
+        private DataStorageModel _selecteDataStorageModel;
+
+        public DataStorageModel SelecteDataStorageModel
+        {
+            get { return _selecteDataStorageModel; }
+            set
+            {
+                _selecteDataStorageModel = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<DataStorageModel> Models { get; set; }
         public string NewName { get; set; }
         public string NewSurname { get; set; }
@@ -54,13 +66,40 @@ namespace CRUD_WP81
         }
 
         private void UpdateClickMethod()
-        {
 
+        {
+           SelecteDataStorageModel.Name = NewName;
+           SelecteDataStorageModel.Surname = NewSurname;
+           SelecteDataStorageModel.Age = NewAge;
+         
         }
 
         private void DeleteClickMethod()
         {
-//            Models.ToList().RemoveAt(x => x.IsSelected = SelectedIndex);
+        Models.RemoveAll(i => i.IsSelected);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-}
+    }
+
+        public static class ExtensionMethods
+    {
+        public static int RemoveAll<T>(
+            this ObservableCollection<T> coll, Func<T, bool> condition)
+        {
+            var itemsToRemove = coll.Where(condition).ToList();
+
+            foreach (var itemToRemove in itemsToRemove)
+            {
+                coll.Remove(itemToRemove);
+            }
+
+            return itemsToRemove.Count;
+         }
+     }

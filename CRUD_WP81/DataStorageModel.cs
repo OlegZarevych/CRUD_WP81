@@ -9,9 +9,38 @@ namespace CRUD_WP81
 {
     public class DataStorageModel : INotifyPropertyChanged
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public int Age { get; set; }
+        private string _name;
+        private string _surname;
+        private int _age;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
+        public string Surname
+        {
+            get { return _surname; }
+            set
+            {
+                _surname = value;
+                OnPropertyChanged("Surname");
+            }
+        }
+
+        public int Age
+        {
+            get { return _age; }
+            set
+            {
+                _age = value;
+                OnPropertyChanged("Age");
+            }
+        }
 
         private bool _isSelected;
 
@@ -30,7 +59,7 @@ namespace CRUD_WP81
         }
 
             public event PropertyChangedEventHandler PropertyChanged;
-            protected virtual void OnPropertyChanged(string propertyName)
+            public virtual void OnPropertyChanged(string propertyName)
         {
             
             if (PropertyChanged != null)
