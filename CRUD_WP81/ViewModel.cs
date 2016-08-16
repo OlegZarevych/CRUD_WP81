@@ -21,19 +21,8 @@ using System.Runtime.CompilerServices;
 
 namespace CRUD_WP81
 {
-    public class ViewModel : INotifyPropertyChanged
+    public class ViewModel
     {
-        private DataStorageModel _selecteDataStorageModel;
-
-        public DataStorageModel SelecteDataStorageModel
-        {
-            get { return _selecteDataStorageModel; }
-            set
-            {
-                _selecteDataStorageModel = value;
-                OnPropertyChanged();
-            }
-        }
 
         public ObservableCollection<DataStorageModel> Models { get; set; }
         public string NewName { get; set; }
@@ -68,10 +57,15 @@ namespace CRUD_WP81
         private void UpdateClickMethod()
 
         {
-           SelecteDataStorageModel.Name = NewName;
-           SelecteDataStorageModel.Surname = NewSurname;
-           SelecteDataStorageModel.Age = NewAge;
-         
+
+            var selectedModels = Models.Where(i => i.IsSelected);
+            foreach(var item in selectedModels)
+            {
+                item.Name = NewName;
+                item.Surname = NewSurname;
+                item.Age = NewAge;
+            }
+
         }
 
         private void DeleteClickMethod()
@@ -79,12 +73,6 @@ namespace CRUD_WP81
         Models.RemoveAll(i => i.IsSelected);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
     }
 

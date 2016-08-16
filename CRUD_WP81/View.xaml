@@ -41,12 +41,12 @@
         </Grid>
 
         <Grid x:Name="StoragePlace" Grid.Row="2">
-            <ListBox x:Name="Storage" Background="Gray" FontSize="14" ItemsSource="{Binding Path=Models, Mode=TwoWay}" SelectedItem="{Binding SelecteDataStorageModel, Mode=TwoWay}" >
+            <ListBox x:Name="Storage" Background="Gray" FontSize="14" ItemsSource="{Binding Path=Models, Mode=TwoWay}"  >
                 <ListBox.ItemTemplate>
                     <DataTemplate >
                         <Grid  Height="60" Width="400" >
 
-                            <CheckBox  x:Name="checkbox" Height="60" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50"  IsChecked="{Binding IsSelected, Mode=TwoWay}" >
+                            <CheckBox  x:Name="checkbox" Height="60" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50"  IsChecked="{Binding IsSelected, Mode=TwoWay}">
                        <!--         <CheckBox.DataContext>
                                     <local:DataStorageModel/>
                                 </CheckBox.DataContext> -->
